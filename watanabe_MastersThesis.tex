@@ -1,0 +1,122 @@
+\documentclass[uplatex,dvipdfmx,11pt,fleqn]{jsarticle}
+
+\usepackage{newtxtext}% 欧文フォント
+\usepackage{newtxmath}% 数式フォント
+\usepackage[
+    dvipdfmx,hidelinks,
+    pdftitle=ナノ結晶FeCoNiミディアムエントロピー合金の変形特性,
+    pdfauthor=渡邉充哉 <watanabe@osakafu-u.net>
+]{hyperref}
+\usepackage{sotsuken}
+\usepackage{booktabs}% 表組み
+\usepackage{amsmath}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[uplatex,deluxe]{otf}% 多ウエイト対応
+
+% フォントの設定
+\DeclareFontShape{JY2}{hmc}{b}{n}{<->ssub*hmc/bx/n}{}
+\DeclareFontShape{JT2}{hmc}{b}{n}{<->ssub*hmc/bx/n}{}
+\DeclareFontShape{JT2}{hgt}{b}{n}{<->ssub*hgt/bx/n}{}
+\DeclareFontShape{JY2}{hgt}{b}{n}{<->ssub*hgt/bx/n}{}
+
+%\usepackage{color}
+% \usepackage{mediabb}% xbbファイル読込み
+% \usepackage{float}% 図H指定
+%\setlength\intextsep{80zh}% 本文中の図の余白
+\setlength\abovecaptionskip{0.5zh}% 図とキャプションとの余白
+%\usepackage[subrefformat=parens]{subcaption}% サブキャプション
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}% 脚注記号
+\usepackage{pdfpages}
+\usepackage[version=3]{mhchem}% 化学反応式
+\usepackage{siunitx}% SI単位
+% \sisetup{detect-all}
+% \usepackage{multirow}% 段組み
+
+% \usepackage{mathtools}\mathtoolsset{showonlyrefs=false}% 数式番号
+\usepackage{empheq}% 連立方程式
+%\allowdisplaybreaks[4]% 数式中の改ページ許可（0→4）
+
+\usepackage{dcolumn}% 小数点揃え
+%\usepackage{nidanfloat}% 図表段抜き
+% \usepackage{balance}% 段ぞろえ
+% \usepackage{wrapfig}% 図の回り込み
+\usepackage[numbers,sort&compress]{natbib}
+
+%titlepageここから
+% \renewcommand{\title}{}%標題
+% \renewcommand{\Engtitle}{}%英文標題
+% \renewcommand{\reportnumber}{}%レポート番号
+% \renewcommand{\thesis}{2021年度 修士論文}%レポート名
+% \renewcommand{\edition}{}%レポートの種類・版表示
+% \renewcommand{\id}{2200105128}%学籍番号
+% \renewcommand{\author}{渡邉 充哉}%著者
+% \renewcommand{\Engauthor}{Watanabe Atsuya}%英文著者名
+% \renewcommand{\freespace}{}
+% \renewcommand{\yearr}{2022}%発行年
+% \renewcommand{\date}{2022年MM月DD日}%発行日
+% \renewcommand{\editdata}{\date}
+% \renewcommand{\organization}{大阪府立大学}
+% \renewcommand{\department}{工学研究科 物質・化学系専攻 マテリアル工学分野}%発行者名
+% \renewcommand{\Engdepartment}{Dept. Materials Science, Osaka Prefecture University}%英文発行者名
+% \renewcommand{\address}{〒599-8531 大阪府堺市中区学園町1番1号}%発行者所在地
+% \renewcommand{\tel}{xxx-xxxx-xxxx}%発行者電話番号
+% \renewcommand{\mail}{watanabe@osakafu-u.net}
+
+\begin{document}
+%\maketitlepage% 表紙
+\renewcommand{\thepage}{Title}% コレないとpdf上のページ番号がうまくいかない
+\includepdf{parts/frontpage.pdf}
+\pagenumbering{roman}
+% \makedocumentseet
+\clearpage
+\doublespacing
+\section*{抄録 / Abstract}
+\phantomsection
+\addcontentsline{toc}{section}{抄録}
+\input{parts/0_abstract.tex}
+
+\clearpage
+\phantomsection
+% \singlespacing
+\addcontentsline{toc}{section}{目次}
+\tableofcontents% 目次
+%\thispagestyle{roman}% ページ番号消去
+\clearpage
+\pagenumbering{arabic}
+\renewcommand{\thepage}{\arabic{page}}
+
+% ==========記事ここから==========
+\doublespacing
+\section{緒言}
+\input{parts/1_intro.tex}
+\clearpage
+\section{方法}
+\input{parts/2_MaterialsMethod.tex}
+\clearpage
+\section{結果と考察}
+\input{parts/3_Results.tex}
+\clearpage
+\section{結言}
+\input{parts/4_conclusion.tex}
+% ==========記事ここまで==========
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{参照文献}
+\bibliographystyle{Scripta-new-2}
+\bibliography{parts/ref}
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{謝辞}
+\section*{謝辞}
+\input{parts/5_acknowledgments.tex}
+\clearpage
+
+%\clearpage
+%\clearpage
+%\makeokuzuke
+%\pagenumbering{roman}%
+%\setcounter{page}{1}%
+%\thispagestyle{empty}%
+\end{document}

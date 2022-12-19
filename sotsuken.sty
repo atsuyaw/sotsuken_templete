@@ -1,0 +1,208 @@
+%!TEX encoding = UTF-8 Unicode
+\ProvidesPackage{sotsuken}[2021-02-04 v2.4 A. Watanabe]
+
+\usepackage{setspace}
+%\usepackage[top=30truemm,bottom=30truemm,left=30truemm,right=25truemm]{geometry}
+% \usepackage{cite}%文献番号
+
+%図表番号を節ごとに振る
+\makeatletter
+\def\thefigure{\arabic{section}$\cdot$\arabic{figure}}
+\@addtoreset{figure}{section}
+\def\thetable{\arabic{section}$\cdot$\arabic{table}}
+\@addtoreset{table}{section}
+\makeatother
+
+%図表のキャプション見出しを英語にする。
+% \renewcommand{\figurename}{Figure}
+% \renewcommand{\tablename}{Table}
+
+%数式番号を節ごとに振る
+%\makeatletter
+%  \renewcommand{\theequation}{%
+%  \thesection・\arabic{equation}}
+%  \@addtoreset{equation}{section}
+%\makeatother
+
+\setlength\abovecaptionskip{-1.5zh}%図とキャプションとの余白を調整
+
+%目次に第4段階まで表示
+\setcounter{tocdepth}{4}
+
+% 章番号をサンセリフにする
+\makeatletter
+\if@twocolumn
+  \renewcommand{\section}{%
+    \@startsection{section}{1}{\z@}%
+    {0.6\Cvs}{0.4\Cvs}%
+    {\normalfont\large\sffamily\bfseries\raggedright}}
+\else
+  \renewcommand{\section}{%
+    \if@slide\clearpage\fi
+    \@startsection{section}{1}{\z@}%
+    {\Cvs \@plus.5\Cdp \@minus.2\Cdp}% 前アキ
+    {.5\Cvs \@plus.3\Cdp}% 後アキ
+    {\normalfont\Large\sffamily\bfseries\raggedright}}
+\makeatother
+
+%セクション見出しのフォントサイズを10ptにする
+%\usepackage{titlesec}
+%\titleformat*{\section}{\fontsize{10pt}{0pt}\sffamily}
+%\titleformat*{\subsection}{\fontsize{10pt}{0pt}\sffamily}
+
+%文献番号を上付き数字にする
+%\makeatletter
+% \DeclareRobustCommand\cite{\unskip
+%\@ifnextchar[{\@tempswatrue\@citex}{\@tempswafalse\@citex[]}}
+% \def\@cite#1#2{$^{\hbox{\scriptsize{#1\if@tempswa , #2\fi})}}$}
+% \def\@biblabel#1{#1)}
+%\makeatother
+
+%第4段階見出し
+\makeatletter
+\newcommand{\subsubsubsection}{\@startsection{paragraph}{4}{\z@}%
+	{1.0\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
+	{.1\Cvs \@plus.3\Cdp}%
+{\reset@font\sffamily\normalsize}%
+ }
+\makeatother
+
+\setcounter{secnumdepth}{4}%ポイントシステム
+\renewcommand{\thesection}{第\arabic{section}章}%第X章
+%\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}.}
+%\renewcommand{\thesubsubsection}{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}.}
+\renewcommand{\theparagraph}{(\arabic{paragraph})}%\paragraphは括弧表示
+
+% 目次をサンセリフ化
+\renewcommand{\headfont}{\sffamily\bfseries}
+
+\renewcommand{\refname}{参照文献}% 「参考文献」を変更
+\usepackage{url}\urlstyle{same}
+\usepackage{pxjahyper}
+
+%----------表紙用変数定義----------
+\renewcommand{\title}{\tt\textbackslash title}%標題
+\newcommand{\Engtitle}{\tt\textbackslash Engtitle}%英文標題
+\newcommand{\reportnumber}{\tt\textbackslash reportnumber}%レポート番号
+\newcommand{\thesis}{\tt\textbackslash thesis}%レポート名
+\newcommand{\edition}{\tt\textbackslash edition}%レポートの種類・版表示
+\newcommand{\id}{\tt\textbackslash id}%学籍番号
+\renewcommand{\author}{\tt \textbackslash author}%著者
+\newcommand{\Engauthor}{\tt\textbackslash Engauthor}%英文著者名
+\newcommand{\freespace}{\tt\textbackslash freespace}
+\newcommand{\yearr}{\tt\textbackslash yearr}%発行年
+\renewcommand{\date}{\tt\textbackslash date}%発行日
+\newcommand{\organization}{\tt\textbackslash organization}
+\newcommand{\department}{\tt\textbackslash department}%発行者名
+\newcommand{\Engdepartment}{\tt\textbackslash Engdepartment}%英文発行者名
+\newcommand{\address}{\tt\textbackslash address}%発行者所在地
+\newcommand{\tel}{\tt\textbackslash tel}%発行者電話番号
+\newcommand{\mail}{\tt\textbackslash mail}
+\newcommand{\editdata}{\tt\textbackslash editdata}%版履歴
+%----------表紙用変数定義----------
+
+%----------表紙----------
+\def\maketitlepage{%
+{\large \rightline{\reportnumber} \par}%レポート番号
+{\Large (\thesis) \par} %レポート名
+\begin{center}%
+\vspace{1.5em}%
+{\Huge \sffamily \title \par}%標題
+\vspace{1em}%
+{\LARGE \sffamily \Engtitle \par}%英文標題
+\vspace{5em}%
+{\Large \id \par}% 学籍番号
+{\Large \author \par}%著者名
+{\Large \Engauthor \par}%英語氏名
+%\vspace{10mm}
+\vfill
+{\freespace}
+\vfill%
+{\Large \edition \par} %レポートの種類・版表示
+\vspace{10mm}%
+{\Large \date \par}	% 提出年月日部分
+\vspace{10mm}%
+{\huge \organization \\ \department\\} %発行者（所属機関）名
+{\Large \Engdepartment \par}	% 英語発行者（所属機関）名
+\end{center}%
+\par\vskip 1.5em%
+\thispagestyle{empty}
+\clearpage
+}
+%----------表紙ここまで----------
+
+%----------ドキュメントシート変数定義----------
+\newcommand{\syoroku}{\tt\textbackslash syoroku}
+\newcommand{\datee}{\tt\textbackslash datee}
+\newcommand{\Engaddress}{\tt\textbackslash Engaddress}
+\newcommand{\ISBN}{\tt\textbackslash ISBN}
+\newcommand{\ISSN}{\tt\textbackslash ISSN}
+\newcommand{\keyword}{\tt\textbackslash keyword}
+\newcommand{\thesaurus}{\tt\textbackslash thesaurus}
+\newcommand{\category}{\tt\textbackslash category}
+\newcommand{\valuee}{\tt\textbackslash valuee}
+%----------ドキュメントシート変数定義----------
+
+%----------奥付----------
+\newcommand{\makeokuzuke}{%
+\onecolumn
+\begin{table}[b]
+\centering
+\begin{tabular}{ll}
+\vbox to 180mm{\vfill}	\\
+\multicolumn{2}{l}{\small\thesis}	\\
+\multicolumn{1}{l}{\Large\title}&	\\
+\toprule
+\editdata	\\
+%	&編集並びに発行	\\
+\author\\
+\organization	\\
+\department	\\
+\address	\\
+TEL: \tel	\\ 
+Mail: \mail	\\	\bottomrule
+%\multicolumn{2}{c}{\copyright \yearr \organization}
+\end{tabular}
+\end{table}
+}
+%----------奥付ここまで----------
+
+%----------ドキュメントシート----------
+\newcommand{\makedocumentseet}{
+\begin{table}[hptb]
+	\begin{tabular*}{\hsize}{@{\extracolsep{\fill}}|c|c|c|c|c|c|c|}\hline
+%	1 & 2 & 3 & 4 & 5 & 6 & 7 \\ \hline
+%	\multicolumn{7}{c}{\Large ドキュメントシート} \\ \hline
+	レポート番号 & \multicolumn{2}{l|}{\reportnumber} &\multicolumn{2}{c|}{レポート名} & \multicolumn{2}{l|}{\thesis} \\ \hline
+	\multicolumn{3}{|l|}{標題} & \multicolumn{2}{c|}{ISBN} & \multicolumn{2}{l|}{\ISBN} \\ \cline{4-7}
+	\multicolumn{3}{|l|}{\parbox[t]{80mm}{\large\title}} & \multicolumn{2}{c|}{ISSN} & \multicolumn{2}{l|}{\ISSN} \\ \cline{4-7}
+	 \multicolumn{3}{|l|}{} & \multicolumn{2}{c|}{発行年月日} & \multicolumn{2}{c|}{\datee} \\ \cline{4-7}
+	\multicolumn{3}{|l|}{（英文標題）} & \multicolumn{3}{c|}{レポート作成に関する年月日} & \\ \cline{4-7}
+	\multicolumn{3}{|l|}{\Engtitle} & \multicolumn{2}{c|}{ページ数} & \multicolumn{2}{c|}{\pageref{pages}} \\ \hline
+	著者名 & \multicolumn{2}{c|}{ローマ字表記} & \multicolumn{4}{c|}{所属} \\ \hline
+	\author & \multicolumn{2}{c|}{\Engauthor} & \multicolumn{4}{c|}{第4学年} \\ \hline
+	著者の所属機関名 & \multicolumn{6}{l|}{\department} \\
+	（英文） & \multicolumn{6}{l|}{\parbox[t]{33em}{\Engdepartment}} \\
+	同上所在地 & \multicolumn{6}{l|}{\address　\tel} \\
+	（英文） & \multicolumn{6}{l|}{\Engaddress} \\ \hline
+	関連機関名 & \multicolumn{4}{l|}{} & 役割 &  \\ \cline{6-7}
+	（英文） & \multicolumn{6}{l|}{} \\
+	同上所在地 & \multicolumn{6}{l|}{} \\
+	（英文） & \multicolumn{6}{l|}{} \\ \hline
+	レポートの種類 & \multicolumn{4}{l|}{\scriptsize 1.中間報告　\textcircled{2}.最終報告　3.第　年次報告　4.その他（\hfill ）} & 版表示 & 初版 \\ \hline
+	調査・研究の種類 & \multicolumn{6}{l|}{1.自主研究　2.委託研究　3.共同研究　\textcircled{4}.その他（実習）} \\ \hline
+	\multicolumn{7}{|l|}{抄録} \\
+	\multicolumn{7}{|l|}{\parbox[t]{44zw}{\syoroku}} \\ \hline
+	\multicolumn{7}{|l|}{キーワード} \\
+	\multicolumn{7}{|l|}{\parbox[t]{44zw}{\keyword}} \\ \hline
+	シソーラス & \multicolumn{2}{l|}{\thesaurus} & 分類 & \multicolumn{3}{l|}{\category} \\ \hline
+	機密保護の指定 & \multicolumn{6}{l|}{1.関係者外秘　2.一定期間秘（\hfill 年\hfill 月まで）　\textcircled{3}.特に指定せず} \\ \hline
+	\multicolumn{2}{|c|}{配布者名（又は販売者名）} & \multicolumn{5}{l|}{} \\
+	\multicolumn{2}{|c|}{同上所在地} & \multicolumn{5}{l|}{} \\ \hline
+	価格 & \multicolumn{6}{l|}{\valuee} \\ \hline
+	注記 & \multicolumn{6}{l|}{} \\ \hline
+\end{tabular*}
+\end{table}
+\clearpage
+}
+%----------ドキュメントシートここまで----------
